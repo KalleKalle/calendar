@@ -440,9 +440,9 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
             textView = (TextView) itemView.findViewById(R.id.text_view_title);
             textView.setTransformationMethod(
                     new AllCapsTransformationMethod(textView.getContext()));
-            textViewMorning = (TextView) itemView.findViewById(R.id.text_view_morning);
-            textViewAfternoon = (TextView) itemView.findViewById(R.id.text_view_afternoon);
-            textViewNight = (TextView) itemView.findViewById(R.id.text_view_night);
+            textViewMorning = (TextView) itemView.findViewById(R.id.text_view_Breakfast);
+            textViewAfternoon = (TextView) itemView.findViewById(R.id.text_view_Lunch);
+            textViewNight = (TextView) itemView.findViewById(R.id.text_view_Dinner);
         }
     }
 

@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/text_view_title"
-        tools:text="Mon, March 7th, 2016"
+        tools:text="Thu, April 6th, 2017"
         style="@style/TextAppearance.AppCompat.Caption"
         android:paddingTop="@dimen/padding"
         android:paddingBottom="@dimen/padding"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/text_view_morning"
+            android:id="@+id/text_view_Breakfast"
             style="@style/Widget.AppTheme.TextView.Weather"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -30,50 +30,50 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="@string/morning"
+            android:text="@string/breakfast"
             style="@style/Widget.AppTheme.TextView.Weather"
-            android:layout_toLeftOf="@id/text_view_morning"
-            android:layout_toStartOf="@id/text_view_morning"
-            android:layout_alignTop="@id/text_view_morning"
-            android:layout_alignBottom="@id/text_view_morning"
+            android:layout_toLeftOf="@id/text_view_Breakfast"
+            android:layout_toStartOf="@id/text_view_Breakfast"
+            android:layout_alignTop="@id/text_view_Breakfast"
+            android:layout_alignBottom="@id/text_view_Breakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/text_view_afternoon"
+            android:id="@+id/text_view_Lunch"
             style="@style/Widget.AppTheme.TextView.Weather"
-            android:layout_below="@id/text_view_morning"
+            android:layout_below="@id/text_view_Breakfast"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="@string/afternoon"
+            android:text="@string/lunch"
             style="@style/Widget.AppTheme.TextView.Weather"
-            android:layout_toLeftOf="@id/text_view_afternoon"
-            android:layout_toStartOf="@id/text_view_afternoon"
-            android:layout_alignTop="@id/text_view_afternoon"
-            android:layout_alignBottom="@id/text_view_afternoon"
+            android:layout_toLeftOf="@id/text_view_Lunch"
+            android:layout_toStartOf="@id/text_view_Lunch"
+            android:layout_alignTop="@id/text_view_Lunch"
+            android:layout_alignBottom="@id/text_view_Lunch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/text_view_night"
+            android:id="@+id/text_view_Dinner"
             style="@style/Widget.AppTheme.TextView.Weather"
-            android:layout_below="@id/text_view_afternoon"
+            android:layout_below="@id/text_view_Lunch"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="@string/night"
+            android:text="@string/dinner"
             style="@style/Widget.AppTheme.TextView.Weather"
-            android:layout_toLeftOf="@id/text_view_night"
-            android:layout_toStartOf="@id/text_view_night"
-            android:layout_alignTop="@id/text_view_night"
-            android:layout_alignBottom="@id/text_view_night"
+            android:layout_toLeftOf="@id/text_view_Dinner"
+            android:layout_toStartOf="@id/text_view_Dinner"
+            android:layout_alignTop="@id/text_view_Dinner"
+            android:layout_alignBottom="@id/text_view_Dinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

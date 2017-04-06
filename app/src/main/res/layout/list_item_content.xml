@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/text_view_title"
-            tools:text="Event"
+            tools:text="Meal"
             style="@style/TextAppearance.AppCompat.Body1"
             android:paddingLeft="@dimen/horizontal_padding"
             android:paddingStart="@dimen/horizontal_padding"
