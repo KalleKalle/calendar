@@ -31,8 +31,7 @@
         <activity android:name=".EditActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
-        <receiver android:name=".weather.WeatherSyncAlarmReceiver" />
-        <service android:name=".weather.WeatherSyncService" />
+
     </application>
 
 </manifest>

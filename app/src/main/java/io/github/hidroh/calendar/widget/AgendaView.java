@@ -18,7 +18,6 @@ import android.view.View;
 import io.github.hidroh.calendar.CalendarUtils;
 import io.github.hidroh.calendar.R;
 import io.github.hidroh.calendar.ViewUtils;
-import io.github.hidroh.calendar.weather.Weather;
 
 public class AgendaView extends RecyclerView {
     private static final String STATE_VIEW = "state:view";
@@ -143,11 +142,6 @@ public class AgendaView extends RecyclerView {
      * Sets weather information to be displayed
      * @param weather    weather information to be displayed, or null to disable
      */
-    public void setWeather(@Nullable Weather weather) {
-        if (mAdapter != null) {
-            mAdapter.setWeather(weather);
-        }
-    }
 
     /**
      * Clears previous bindings if any, resets view to initial state and triggers rebinding data

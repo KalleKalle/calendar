@@ -29,7 +29,6 @@ import io.github.hidroh.calendar.CalendarUtils;
 import io.github.hidroh.calendar.EditActivity;
 import io.github.hidroh.calendar.R;
 import io.github.hidroh.calendar.content.EventCursor;
-import io.github.hidroh.calendar.weather.Weather;
 
 /**
  * 'Unlimited' adapter that load more and prune items
@@ -56,7 +55,6 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
     private final int mTransparentColor;
     private final int mIconTint;
     private int mColors[];
-    private Weather mWeather;
     private boolean mLock;
 
     public AgendaAdapter(Context context) {
@@ -94,7 +92,6 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
         bindTitle(item, holder);
         if (item instanceof EventGroup) {
             loadEvents(position);
-            bindWeather((EventGroup) item, (GroupViewHolder) holder);
         } else {
             bindTime((EventItem) item, (ContentViewHolder) holder);
             bindColor((EventItem) item, (ContentViewHolder) holder);
@@ -308,10 +305,6 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
      * Sets weather information to be displayed
      * @param weather    weather information to be displayed, or null to disable
      */
-    void setWeather(@Nullable Weather weather) {
-        mWeather = weather;
-        notifyItemRangeChanged(0, getItemCount());
-    }
 
     private void bindTitle(AdapterItem item, RowViewHolder holder) {
         if (item instanceof EventGroup) {
@@ -357,32 +350,6 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
         }
     }
 
-    private void bindWeather(EventGroup groupItem, final GroupViewHolder holder) {
-        // bind weather for today and tomorrow if exist, hide UI otherwise
-        if (groupItem.mTimeMillis == CalendarUtils.today() &&
-                mWeather != null && mWeather.today != null) {
-            bindWeatherInfo(holder.textViewMorning, mWeather.today.morning);
-            bindWeatherInfo(holder.textViewAfternoon, mWeather.today.afternoon);
-            bindWeatherInfo(holder.textViewNight, mWeather.today.night);
-            holder.weather.setVisibility(View.VISIBLE);
-        } else if (groupItem.mTimeMillis == CalendarUtils.today() + DateUtils.DAY_IN_MILLIS &&
-                mWeather != null && mWeather.tomorrow != null) {
-            bindWeatherInfo(holder.textViewMorning, mWeather.tomorrow.morning);
-            bindWeatherInfo(holder.textViewAfternoon, mWeather.tomorrow.afternoon);
-            bindWeatherInfo(holder.textViewNight, mWeather.tomorrow.night);
-            holder.weather.setVisibility(View.VISIBLE);
-        } else {
-            holder.weather.setVisibility(View.GONE);
-        }
-    }
-
-    private void bindWeatherInfo(TextView textView, Weather.WeatherInfo info) {
-        Drawable icon = info.getIcon(textView.getContext(), mIconTint);
-        textView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-        if (info.temperature != null) {
-            textView.setText(textView.getContext().getString(R.string.fahrenheit, info.temperature));
-        }
-    }
 
     private Pair<EventGroup, Integer> findGroup(long timeMillis) {
         int position = 0;

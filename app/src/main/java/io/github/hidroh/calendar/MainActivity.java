@@ -43,7 +43,6 @@ import java.util.HashSet;
 import io.github.hidroh.calendar.content.CalendarCursor;
 import io.github.hidroh.calendar.content.EventCursor;
 import io.github.hidroh.calendar.content.EventsQueryHandler;
-import io.github.hidroh.calendar.weather.WeatherSyncService;
 import io.github.hidroh.calendar.widget.AgendaAdapter;
 import io.github.hidroh.calendar.widget.AgendaView;
 import io.github.hidroh.calendar.widget.CalendarSelectionView;
@@ -58,17 +57,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int LOADER_CALENDARS = 0;
     private static final int LOADER_LOCAL_CALENDAR = 1;
 
-    private final SharedPreferences.OnSharedPreferenceChangeListener mWeatherChangeListener =
-            new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-                                                      String key) {
-                    if (TextUtils.equals(key, WeatherSyncService.PREF_WEATHER_TODAY) ||
-                            TextUtils.equals(key, WeatherSyncService.PREF_WEATHER_TOMORROW)) {
-                        loadWeather();
-                    }
-                }
-            };
     private final CalendarSelectionView.OnSelectionChangeListener mCalendarSelectionListener
             = new CalendarSelectionView.OnSelectionChangeListener() {
         @Override
@@ -168,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             if (!mWeatherEnabled && !checkLocationPermissions()) {
                 requestLocationPermissions();
             } else {
-                toggleWeather();
             }
             return true;
         }
@@ -200,8 +187,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .putString(CalendarUtils.PREF_CALENDAR_EXCLUSIONS,
                         TextUtils.join(SEPARATOR, mExcludedCalendarIds))
                 .apply();
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(mWeatherChangeListener);
     }
 
     @Override
@@ -228,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 break;
             case REQUEST_CODE_LOCATION:
                 if (checkLocationPermissions()) {
-                    toggleWeather();
                 } else {
                     explainLocationPermissions();
                 }
@@ -273,16 +257,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void setUpPreferences() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        mWeatherEnabled = mPendingWeatherEnabled = sp.getBoolean(
-                WeatherSyncService.PREF_WEATHER_ENABLED, false);
         String exclusions = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(CalendarUtils.PREF_CALENDAR_EXCLUSIONS, null);
         if (!TextUtils.isEmpty(exclusions)) {
             mExcludedCalendarIds.addAll(Arrays.asList(exclusions.split(SEPARATOR)));
         }
         CalendarUtils.sWeekStart = sp.getInt(CalendarUtils.PREF_WEEK_START, Calendar.SUNDAY);
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(mWeatherChangeListener);
+        ;
     }
 
     private void setUpContentView() {
@@ -374,22 +355,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mFabAdd.show();
         mCalendarView.setCalendarAdapter(new CalendarCursorAdapter(this, mExcludedCalendarIds));
         mAgendaView.setAdapter(new AgendaCursorAdapter(this, mExcludedCalendarIds));
-        loadWeather();
     }
 
-    private void toggleWeather() {
-        mWeatherEnabled = mPendingWeatherEnabled;
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .edit()
-                .putBoolean(WeatherSyncService.PREF_WEATHER_ENABLED, mWeatherEnabled)
-                .apply();
-        supportInvalidateOptionsMenu();
-        loadWeather();
-    }
 
-    private void loadWeather() {
-        mAgendaView.setWeather(mWeatherEnabled ? WeatherSyncService.getSyncedWeather(this) : null);
-    }
 
     private void createLocalCalendar() {
         String name = getString(R.string.default_calendar_name);
