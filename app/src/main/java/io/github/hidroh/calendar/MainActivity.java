@@ -39,13 +39,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
-
 import io.github.hidroh.calendar.content.CalendarCursor;
 import io.github.hidroh.calendar.content.EventCursor;
 import io.github.hidroh.calendar.content.EventsQueryHandler;
 import io.github.hidroh.calendar.widget.AgendaAdapter;
 import io.github.hidroh.calendar.widget.AgendaView;
-import io.github.hidroh.calendar.widget.CalendarSelectionView;
 import io.github.hidroh.calendar.widget.EventCalendarView;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -57,26 +55,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int LOADER_CALENDARS = 0;
     private static final int LOADER_LOCAL_CALENDAR = 1;
 
-    private final CalendarSelectionView.OnSelectionChangeListener mCalendarSelectionListener
-            = new CalendarSelectionView.OnSelectionChangeListener() {
-        @Override
-        public void onSelectionChange(long id, boolean enabled) {
-            if (!enabled) {
-                mExcludedCalendarIds.add(String.valueOf(id));
-            } else {
-                mExcludedCalendarIds.remove(String.valueOf(id));
-            }
-            mCalendarView.invalidateData();
-            mAgendaView.invalidateData();
-        }
-    };
+
     private final Coordinator mCoordinator = new Coordinator();
     private View mCoordinatorLayout;
     private CheckedTextView mToolbarToggle;
     private EventCalendarView mCalendarView;
     private AgendaView mAgendaView;
     private FloatingActionButton mFabAdd;
-    private CalendarSelectionView mCalendarSelectionView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View mDrawer;
@@ -226,25 +211,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        switch (loader.getId()) {
-            case LOADER_CALENDARS:
-                if (data != null && data.moveToFirst()) {
-                    mCalendarSelectionView.swapCursor(new CalendarCursor(data), mExcludedCalendarIds);
-                }
-                break;
-            case LOADER_LOCAL_CALENDAR:
-                if (data == null || data.getCount() == 0) {
-                    createLocalCalendar();
-                }
-                break;
-        }
-    }
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {}
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mCalendarSelectionView.swapCursor(null, null);
-    }
+    public void onLoaderReset(Loader<Cursor> loader) {}
 
     private void setUpPreferences() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -259,9 +229,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void setUpContentView() {
         mCoordinatorLayout = findViewById(R.id.coordinator_layout);
-        mCalendarSelectionView = (CalendarSelectionView) findViewById(R.id.list_view_calendar);
         //noinspection ConstantConditions
-        mCalendarSelectionView.setOnSelectionChangeListener(mCalendarSelectionListener);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawer = findViewById(R.id.drawer);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,

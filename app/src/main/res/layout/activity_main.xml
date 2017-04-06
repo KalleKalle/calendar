@@ -43,21 +43,6 @@
             style="@style/Widget.AppTheme.Drawer"
             android:layout_height="match_parent">
 
-            <TextView
-                android:text="@string/calendars"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/horizontal_padding"
-                android:paddingRight="@dimen/horizontal_padding"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
-
-            <io.github.hidroh.calendar.widget.CalendarSelectionView
-                android:id="@+id/list_view_calendar"
-                android:divider="@color/colorDivider"
-                android:dividerHeight="@dimen/divider_size"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
         </LinearLayout>
 
