@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_weather).setChecked(mWeatherEnabled);
         switch (CalendarUtils.sWeekStart) {
             case Calendar.SATURDAY:
                 menu.findItem(R.id.action_week_start_saturday).setChecked(true);
@@ -149,14 +148,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_today) {
             mCoordinator.reset();
-            return true;
-        }
-        if (item.getItemId() == R.id.action_weather) {
-            mPendingWeatherEnabled = !mWeatherEnabled;
-            if (!mWeatherEnabled && !checkLocationPermissions()) {
-                requestLocationPermissions();
-            } else {
-            }
             return true;
         }
         if (item.getItemId() == R.id.action_week_start_saturday ||

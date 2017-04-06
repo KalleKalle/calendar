@@ -434,14 +434,12 @@ public abstract class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.R
         final TextView textViewMorning;
         final TextView textViewAfternoon;
         final TextView textViewNight;
-        final View weather;
 
         public GroupViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text_view_title);
             textView.setTransformationMethod(
                     new AllCapsTransformationMethod(textView.getContext()));
-            weather = itemView.findViewById(R.id.weather);
             textViewMorning = (TextView) itemView.findViewById(R.id.text_view_morning);
             textViewAfternoon = (TextView) itemView.findViewById(R.id.text_view_afternoon);
             textViewNight = (TextView) itemView.findViewById(R.id.text_view_night);
