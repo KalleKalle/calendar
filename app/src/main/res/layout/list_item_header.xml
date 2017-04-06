@@ -17,14 +17,12 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
-        android:id="@+id/weather"
+        android:id="@+id/timeOfDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_view_morning"
-            tools:text="Sunny"
-            tools:drawableLeft="@drawable/ic_clear_day_24dp"
             style="@style/Widget.AppTheme.TextView.Weather"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -43,8 +41,6 @@
 
         <TextView
             android:id="@+id/text_view_afternoon"
-            tools:text="Cloudy"
-            tools:drawableLeft="@drawable/ic_cloudy_24dp"
             style="@style/Widget.AppTheme.TextView.Weather"
             android:layout_below="@id/text_view_morning"
             android:layout_alignParentRight="true"
@@ -64,8 +60,6 @@
 
         <TextView
             android:id="@+id/text_view_night"
-            tools:text="Clear"
-            tools:drawableLeft="@drawable/ic_clear_night_24dp"
             style="@style/Widget.AppTheme.TextView.Weather"
             android:layout_below="@id/text_view_afternoon"
             android:layout_alignParentRight="true"

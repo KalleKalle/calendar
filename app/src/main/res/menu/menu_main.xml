@@ -6,7 +6,7 @@
         android:id="@+id/action_today"
         android:title="@string/today"
         app:showAsAction="ifRoom" />
-    
+
     <item
         android:id="@+id/action_week_start"
         android:title="@string/week_start">
